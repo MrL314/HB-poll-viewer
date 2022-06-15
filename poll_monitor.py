@@ -41,6 +41,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
+
 I_CNT = [0, 0]
 K_CNT = [0, 0]
 
@@ -52,6 +53,19 @@ fig, ax = plt.subplots()
 ax.axis([1, 2, 0, 100])
 data_I, = ax.plot(X, np.array(I_CNT), color='#c296ca')
 data_K, = ax.plot(X, np.array(K_CNT), color="blue")
+
+ax.tick_params(axis='x', which='both', bottom=False, top=False, labelbottom=False)
+ax.tick_params(axis='y', which='major', left=True, right=True, labelright=False)
+
+from matplotlib.ticker import (AutoMinorLocator, MultipleLocator) # for grid ticks
+ax.yaxis.set_major_locator(MultipleLocator(2000))
+ax.yaxis.set_minor_locator(AutoMinorLocator(2))
+
+ax.grid(which='major', axis='y', color='gray', linestyle='--', linewidth=0.5)
+ax.grid(which='minor', axis='y', color='gray', linestyle=':', linewidth=0.5)
+
+fig.set_size_inches((7.55, 4.8))
+
 
 I_MAX = 0
 K_MAX = 0
@@ -81,8 +95,8 @@ while True:
 	IRIS_P = round(1000 * IRIS_COUNT / TOTAL_COUNT)/10
 	KAIRO_P = round(1000 * KAIRO_COUNT / TOTAL_COUNT)/10
 
-	print("Iris :", IRIS_COUNT, "votes (" + str(IRIS_P) + "%)")
-	print("Kairo:", KAIRO_COUNT, "votes (" + str(KAIRO_P) + "%)")
+	print("Iris :", str(IRIS_COUNT).rjust(5), "votes (" + str(IRIS_P) + "%)")
+	print("Kairo:", str(KAIRO_COUNT).rjust(5), "votes (" + str(KAIRO_P) + "%)")
 
 
 	I_CNT.append(IRIS_COUNT)
